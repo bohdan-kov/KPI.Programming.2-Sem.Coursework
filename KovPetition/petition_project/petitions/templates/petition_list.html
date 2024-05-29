@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Список петицій{% endblock %}
+
+{% block content %}
+<h2 class="content__title">Список петицій</h2>
+<ol class="petition__list">
+    {% for petition in petitions %}
+    <li class="petition__list--item"><a class="petition__list--link"
+        href="{% url 'petition_detail' petition.id %}">{{ petition.title }}</a> - автор
+      {{ petition.author }}</li>
+    {% endfor %}
+</ol>
+{% endblock %}

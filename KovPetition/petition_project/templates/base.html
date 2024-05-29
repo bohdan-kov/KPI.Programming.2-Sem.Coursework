@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Koval B."/>
+    <meta name="description" content="coursework website of petitions" />
+    <title>{% block title %}KovPetition{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Montserrat, Nunito, Raleway -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Nunito:wght@400;700&family=Open+Sans:wght@300;400&family=Raleway:wght@700;800&display=swap"
+      rel="stylesheet">
+    <!-- Birthstone -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Birthstone&display=swap" rel="stylesheet">
+    <!-- Mohave -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mohave:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header__container">
+      <div class="header__inner">
+        <div class="header__top">
+          <a class="logo__link" href="#">KovPetition <img class="logo__link--img"
+              src="{% static 'images/petitions-hammer.svg' %}" alt=""></a>
+          <nav class="header__menu">
+            <ul class="header__list">
+              <li class="header__item"><a class="header__link" href="{% url 'home' %}">Головна</a></li>
+              <li class="header__item"><a class="header__link" href="{% url 'petition_list' %}">Переглянути петиції</a></li>
+              {% if user.is_authenticated %}
+              <li class="header__item"><a class="header__link" href="{% url 'create_petition' %}">Створити петицію</a>
+              </li>
+              <li class="header__item"><span>Вітаю, {{ user.username }}!</span> <a
+                  class="header__link"
+                  href="{% url 'logout' %}">Вийти</a></li>
+              {% else %}
+              <li class="header__item"><a class="header__link" href="{% url 'login' %}">Вхід</a></li>
+              <li class="header__item"><a class="header__link" href="{% url 'register' %}">Реєстрація</a></li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+        <div class="header__content--inner ring">
+          <div class="ring-items">
+            <i style="--clr:#00ff0a;"></i>
+            <i style="--clr:#ff0057;"></i>
+            <i style="--clr:#fffd44;"></i>
+          </div>
+          <div class="header__content">
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+        <div class="footer">
+          <div class="footer">
+            <p class="footer__autor--text">
+              Курсова робота студента ІС-31 Коваля Богдана
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</body>
+</html>
